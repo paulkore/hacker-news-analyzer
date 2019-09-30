@@ -3,6 +3,7 @@ package analyzer
 object Output {
 
   def outputResult(analysisResult: AnalysisResult): Unit = {
+    println()
 
     Line()
       .add("Story")
