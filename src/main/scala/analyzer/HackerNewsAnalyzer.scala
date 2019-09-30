@@ -5,7 +5,7 @@ import scala.collection.mutable
 
 object HackerNewsAnalyzer {
 
-  def analyze(storiesWithComments: Seq[StoryWithComments]): AnalysisResult = {
+  def analyze(storiesWithComments: Seq[StoryWithComments], topCommentersCount: Int): AnalysisResult = {
     println("Analyzing data...")
 
     val commentsByUsername = mutable.Map[String, Int]()
@@ -22,7 +22,7 @@ object HackerNewsAnalyzer {
       }
 
       val commentersByCountDesc = ListMap(commentsByUsernameForStory.toSeq.sortWith(_._2 > _._2):_*)
-      val topCommenters = commentersByCountDesc.take(10).map(c => Commenter(c._1, c._2)).toSeq
+      val topCommenters = commentersByCountDesc.take(topCommentersCount).map(c => Commenter(c._1, c._2)).toSeq
 
       storiesWithTopCommenters += StoryWithTopCommenters(
         title = story.title,

@@ -10,7 +10,7 @@ object Main extends App {
 
     val storiesWithComments = loadStoriesWithComments()
 
-    val analysisResult = HackerNewsAnalyzer.analyze(storiesWithComments)
+    val analysisResult = HackerNewsAnalyzer.analyze(storiesWithComments, topCommentersCount = 10)
 
     Output.outputResult(analysisResult)
   }
