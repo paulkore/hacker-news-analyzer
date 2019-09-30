@@ -2,24 +2,23 @@ package analyzer
 
 object Main extends App {
 
-  private[this] val hackerNews = HackerNewsService()
+  private val hackerNews = HackerNewsService()
 
   analyze()
 
   private def analyze(): Unit = {
 
-    // TODO: review concurrency aspect if there's time
+    val storiesWithComments = Util.time("Load datafrom Hacker News API") { loadStoriesWithComments() }
 
-    val data = Util.time("Load data from Hacker News API") { loadData() }
+    println("Analyzing data...")
+    val analysisResult = HackerNewsAnalyzer.analyze(storiesWithComments)
 
-    // TODO: aggregate and output results
+    Output.outputResult(analysisResult)
   }
 
-  private def loadData(): Seq[StoryWithComments] = {
-    // TODO: increase to 30 stories
-
+  private def loadStoriesWithComments(): Seq[StoryWithComments] = {
     println("Loading top story IDs...")
-    val topStoryIds = hackerNews.getTopStoryIds(limit = 5)
+    val topStoryIds = hackerNews.getTopStoryIds(limit = 30)
 
     println("Loading stories...")
     val stories = hackerNews.getStories(topStoryIds)
@@ -30,17 +29,7 @@ object Main extends App {
       StoryWithComments(story, comments)
     }
   }
+
 }
 
-case class StoryWithComments(
-  id: Long,
-  title: String,
-  comments: Seq[Comment]
-)
-object StoryWithComments {
-  def apply(story: Story, comments: Seq[Comment]) = new StoryWithComments(
-    id = story.id,
-    title = story.title,
-    comments = comments,
-  )
-}
+

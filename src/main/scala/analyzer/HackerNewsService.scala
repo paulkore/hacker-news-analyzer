@@ -11,7 +11,6 @@ trait HackerNewsService {
   def getStory(storyId: Long): Option[Story]
   def getComment(commentId: Long): Option[Comment]
 }
-
 object HackerNewsService {
 
   private val api = HackerNewsAPI()
