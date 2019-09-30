@@ -4,14 +4,12 @@ object Main extends App {
 
   private val hackerNews = HackerNewsService()
 
-  analyze()
+  Util.time("\n\nTotal run time") { analyze() }
 
   private def analyze(): Unit = {
 
-    val storiesWithComments = Util.time("Load datafrom Hacker News API") { loadStoriesWithComments() }
+    val storiesWithComments = loadStoriesWithComments()
 
-    // TODO: this step seems to be slower than it should be, look into why
-    println("Analyzing data...")
     val analysisResult = HackerNewsAnalyzer.analyze(storiesWithComments)
 
     Output.outputResult(analysisResult)

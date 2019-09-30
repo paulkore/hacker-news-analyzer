@@ -6,6 +6,7 @@ import scala.collection.mutable
 object HackerNewsAnalyzer {
 
   def analyze(storiesWithComments: Seq[StoryWithComments]): AnalysisResult = {
+    println("Analyzing data...")
 
     val commentsByUsername = mutable.Map[String, Int]()
     val storiesWithTopCommenters = mutable.ListBuffer[StoryWithTopCommenters]()
