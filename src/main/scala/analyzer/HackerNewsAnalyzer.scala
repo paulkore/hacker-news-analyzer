@@ -11,6 +11,8 @@ object HackerNewsAnalyzer {
     val storiesWithTopCommenters = mutable.ListBuffer[StoryWithTopCommenters]()
 
     storiesWithComments.foreach { story =>
+      println(s"Analyzing story ${story.title} - ${story.comments.size} comments")
+
       val commentsByUsernameForStory = mutable.Map[String, Int]()
       story.comments.foreach { comment =>
         val username = comment.username
