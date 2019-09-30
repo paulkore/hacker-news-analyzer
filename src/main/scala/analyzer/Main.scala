@@ -10,6 +10,7 @@ object Main extends App {
 
     val storiesWithComments = Util.time("Load datafrom Hacker News API") { loadStoriesWithComments() }
 
+    // TODO: this step seems to be slower than it should be, look into why
     println("Analyzing data...")
     val analysisResult = HackerNewsAnalyzer.analyze(storiesWithComments)
 
