@@ -6,14 +6,10 @@ import scala.collection.mutable
 object HackerNewsAnalyzer {
 
   def analyze(storiesWithComments: Seq[StoryWithComments], topCommentersCount: Int): AnalysisResult = {
-    println("Analyzing data...")
-
     val commentsByUsername = mutable.Map[String, Int]()
     val storiesWithTopCommenters = mutable.ListBuffer[StoryWithTopCommenters]()
 
     storiesWithComments.foreach { story =>
-      println(s"Analyzing story ${story.title} - ${story.comments.size} comments")
-
       val commentsByUsernameForStory = mutable.Map[String, Int]()
       story.comments.foreach { comment =>
         val username = comment.username
@@ -40,17 +36,6 @@ object HackerNewsAnalyzer {
     }
   }
 
-}
-
-case class StoryWithComments(
-  title: String,
-  comments: Seq[Comment],
-)
-object StoryWithComments {
-  def apply(story: Story, comments: Seq[Comment]) = new StoryWithComments(
-    title = story.title,
-    comments = comments,
-  )
 }
 
 case class AnalysisResult(
