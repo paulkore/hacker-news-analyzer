@@ -55,9 +55,6 @@ object HackerNewsAPI {
   }
 }
 
-case class InvalidResponseBodyException(response: Response)
-  extends RuntimeException(s"fail")
-
 case class UnhandledHttpStatusException(response: Response)
   extends RuntimeException(s"Received HTTP status ${response.status}, response body: ${response.textBody}")
 
